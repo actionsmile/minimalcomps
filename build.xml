@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<project default="compile" basedir="." name="Building swc">
+	
+	<property file="build.local.properties" />
+	<property file="build.properties" />
+	
+	<!-- Compile states -->
+	<target name="compile">
+		<echo>[compile] Compiling SWC file from sources</echo>
+		<echo>[compile] Using Flex SDK at: ${flex.home}</echo>
+
+		<!--
+			compc -source-path src -output bin/minimalcomps.swc -include-sources src
+		-->
+
+		<exec executable="${compc}" failonerror="true">
+			<arg value="-source-path=${main.src.loc}" />
+			<arg value="--include-sources=${main.src.loc}" />
+			<arg value="-output=${basedir}/${bin.folder}/${project.name}.swc" />
+		</exec>
+		<echo>[compile] Release SWC ${project.name}.swc created successfully</echo>
+
+		<delete>
+			<fileset dir="${basedir}/${bin.folder}">
+				<include name="*.cache" />
+			</fileset>
+		</delete>
+
+	</target>
+
+</project>

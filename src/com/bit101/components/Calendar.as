@@ -117,6 +117,7 @@ package com.bit101.components
 		 */
 		protected function getEndDay(month:int, year:int):int
 		{
+			var result : int = 30;
 			switch(month)
 			{
 				case 0:		// jan
@@ -126,19 +127,19 @@ package com.bit101.components
 				case 7:		// aug
 				case 9:		// oct
 				case 11:	// dec
-					return 31;
+					result = 31;
 					break;
 				
 				case 1:		// feb
 					if((year % 400 == 0) ||  ((year % 100 != 0) && (year % 4 == 0))) return 29;
-					return 28;
+					result = 28;
 					break;
 				
 				default:	
 					break;
 			}
 			// april, june, sept, nov.
-			return 30;
+			return result;
 		}
 		
 		///////////////////////////////////
